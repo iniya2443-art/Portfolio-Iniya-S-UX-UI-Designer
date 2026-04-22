@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Iniya S — UX/UI Designer</title>
+<meta name="description" content="Portfolio of Iniya S, UX/UI Designer based in Chennai. Designing intuitive, user-centered digital experiences." />
+<meta property="og:title" content="Iniya S — UX/UI Designer" />
+<meta property="og:description" content="Portfolio of Iniya S, UX/UI Designer based in Chennai." />
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --radius: 0.875rem;
+    --color-background: #ffffff;
+    --color-foreground: #1a1f2e;
+    --color-card: #f7f8fa;
+    --color-primary: #619bb6;
+    --color-primary-foreground: #ffffff;
+    --color-secondary: #bad7e1;
+    --color-muted: #f1f3f6;
+    --color-muted-foreground: #6b7280;
+    --color-border: rgba(97,155,182,0.2);
+    --primary-rgb: 97 155 182;
+    --secondary-rgb: 186 215 225;
+    --gradient-name: linear-gradient(135deg, #619bb6 0%, #4f8aaa 30%, #95c1d2 70%, #bad7e1 100%);
+    --gradient-bar: linear-gradient(90deg, #619bb6, #bad7e1);
+    --gradient-tile: linear-gradient(135deg, rgba(97,155,182,0.06), rgba(186,215,225,0.04));
+    --gradient-tile-strong: linear-gradient(135deg, rgba(97,155,182,0.10), rgba(186,215,225,0.08));
+    --gradient-btn: linear-gradient(135deg, #619bb6 0%, #4f8aaa 100%);
+    --shadow-soft: 0 4px 16px rgb(var(--primary-rgb) / 0.10);
+    --shadow-glow: 0 12px 40px rgb(var(--primary-rgb) / 0.25);
+    --shadow-lift: 0 24px 64px rgb(var(--primary-rgb) / 0.25);
+    --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .dark {
+    --color-background: #1a1f2e;
+    --color-foreground: #f7f8fa;
+    --color-card: #242b3d;
+    --color-primary: #95c1d2;
+    --color-primary-foreground: #1a1f2e;
+    --color-secondary: #3a4358;
+    --color-muted: #2a3144;
+    --color-muted-foreground: #a8b2c5;
+    --color-border: rgba(186,215,225,0.15);
+    --gradient-tile: linear-gradient(135deg, rgba(149,193,210,0.08), rgba(186,215,225,0.04));
+    --gradient-tile-strong: linear-gradient(135deg, rgba(149,193,210,0.14), rgba(186,215,225,0.08));
+  }
+  * { box-sizing: border-box; border-color: var(--color-border); }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--color-background);
+    color: var(--color-foreground);
+    font-family: 'Inter', system-ui, sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    transition: background-color .4s var(--ease-smooth), color .4s var(--ease-smooth);
+  }
+  .text-primary { color: var(--color-primary); }
+  .bg-primary { background: var(--color-primary); }
+  .border-primary { border-color: var(--color-primary); }
+
+  /* === Animations === */
+  @keyframes shimmer { to { background-position: 200% center; } }
+  @keyframes float-blob {
+    0%,100% { transform: translate(0,0) scale(1); }
+    33% { transform: translate(30px,-30px) scale(1.05); }
+    66% { transform: translate(-20px,20px) scale(0.95); }
+  }
+  @keyframes pulse-ring {
+    0% { box-shadow: 0 0 0 0 rgb(var(--primary-rgb) / 0.7); transform: scale(1); }
+    50% { box-shadow: 0 0 0 10px rgb(var(--primary-rgb) / 0); transform: scale(1.2); }
+    100% { box-shadow: 0 0 0 0 rgb(var(--primary-rgb) / 0); transform: scale(1); }
+  }
+  @keyframes fade-up { from { opacity:0; transform: translateY(40px);} to { opacity:1; transform: translateY(0);} }
+  @keyframes scroll-bob { 0%,100% { transform: translateY(0); opacity:.6; } 50% { transform: translateY(8px); opacity:1; } }
+  @keyframes spin-slow { to { transform: rotate(360deg);} }
+  @keyframes marquee-ltr { 0%{transform:translateX(-25%)} 50%{transform:translateX(0)} 100%{transform:translateX(-25%)} }
+  @keyframes marquee-rtl { 0%{transform:translateX(0)} 50%{transform:translateX(-25%)} 100%{transform:translateX(0)} }
+  @keyframes twinkle { 0%,100%{opacity:0;transform:scale(.6)} 50%{opacity:1;transform:scale(1.3)} }
+  @keyframes drift-1 { 0%,100%{transform:translate(0,0) rotate(0)} 50%{transform:translate(40px,-60px) rotate(180deg)} }
+  @keyframes drift-2 { 0%,100%{transform:translate(0,0) rotate(0)} 50%{transform:translate(-50px,40px) rotate(-180deg)} }
+  @keyframes drift-3 { 0%,100%{transform:translate(0,0) rotate(0)} 33%{transform:translate(30px,30px) rotate(120deg)} 66%{transform:translate(-30px,20px) rotate(240deg)} }
+  @keyframes name-bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+  @keyframes name-underline { 0%{transform:scaleX(0); transform-origin:left} 25%,75%{transform:scaleX(1); transform-origin:left} 100%{transform:scaleX(0); transform-origin:right} }
+
+  .animate-marquee-ltr { animation: marquee-ltr 30s ease-in-out infinite; }
+  .animate-marquee-rtl { animation: marquee-rtl 30s ease-in-out infinite; }
+  .animate-twinkle { animation: twinkle 3.5s ease-in-out infinite; }
+  .animate-drift-1 { animation: drift-1 18s ease-in-out infinite; }
+  .animate-drift-2 { animation: drift-2 22s ease-in-out infinite; }
+  .animate-drift-3 { animation: drift-3 26s ease-in-out infinite; }
+  .animate-float-blob { animation: float-blob 25s ease-in-out infinite; }
+  .animate-float-blob-rev { animation: float-blob 30s ease-in-out infinite reverse; }
+  .animate-pulse-ring { animation: pulse-ring 2.5s var(--ease-smooth) infinite; }
+  .animate-shimmer {
+    background: var(--gradient-name);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    animation: shimmer 6s linear infinite;
+  }
+  .animate-scroll-bob { animation: scroll-bob 1.8s ease-in-out infinite; }
+  .animate-spin-slow { animation: spin-slow 18s linear infinite; }
+  .name-letter { display:inline-block; animation: name-bounce 2.4s ease-in-out infinite; transform-origin: center bottom; }
+  .name-underline { animation: name-underline 4s ease-in-out infinite 2s; transform-origin:left; }
+
+  /* Reveal */
+  .reveal { opacity:0; transform: translateY(40px); transition: opacity .9s var(--ease-smooth), transform .9s var(--ease-smooth); }
+  .reveal.in-view { opacity:1; transform: translateY(0); }
+
+  .tilt-card { transition: transform .5s var(--ease-smooth), box-shadow .5s var(--ease-smooth), border-color .4s var(--ease-smooth), background .4s var(--ease-smooth); }
+  .tilt-card:hover { transform: translateY(-12px); }
+
+  .story-link { position:relative; display:inline-block; }
+  .story-link::after {
+    content:""; position:absolute; left:50%; bottom:-8px; width:100%; height:2px;
+    background: var(--gradient-bar); transform: translateX(-50%) scaleX(0);
+    transform-origin: right; transition: transform .35s var(--ease-smooth);
+  }
+  .story-link:hover::after { transform: translateX(-50%) scaleX(1); transform-origin:left; }
+
+  .btn-shine { position:relative; overflow:hidden; }
+  .btn-shine::before {
+    content:""; position:absolute; inset:0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,.35), transparent);
+    transform: translateX(-100%); transition: transform .6s var(--ease-smooth);
+  }
+  .btn-shine:hover::before { transform: translateX(100%); }
+
+  .top-accent { position:relative; overflow:hidden; }
+  .top-accent::before {
+    content:""; position:absolute; top:0; left:0; right:0; height:4px;
+    background: var(--gradient-bar); transform: scaleX(0); transform-origin: left;
+    transition: transform .4s var(--ease-smooth);
+  }
+  .top-accent:hover::before { transform: scaleX(1); }
+
+  .skill-item { position:relative; padding-left:1.5rem; transition: padding-left .3s var(--ease-smooth), color .3s var(--ease-smooth); }
+  .skill-item::before { content:"→"; position:absolute; left:0; color: var(--color-primary); font-weight:800; transition: transform .3s var(--ease-smooth); }
+  .skill-item:hover { padding-left:2rem; color: var(--color-primary); }
+  .skill-item:hover::before { transform: translateX(4px); }
+
+  .container-x { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+  .section { padding: 7rem 0; }
+  .gradient-tile { background: var(--gradient-tile); }
+  .gradient-tile-strong { background: var(--gradient-tile-strong); }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; scroll-behavior: auto !important; }
+  }
+
+  /* Theme toggle */
+  .theme-toggle {
+    position: fixed; top: 1.5rem; right: 1.5rem; z-index: 60;
+    width: 44px; height: 44px; border-radius: 12px;
+    background: var(--gradient-tile); border: 1.5px solid var(--color-border);
+    display: flex; align-items: center; justify-content: center; cursor: pointer;
+    color: var(--color-primary); transition: all .3s;
+  }
+  .theme-toggle:hover { transform: translateY(-2px); box-shadow: var(--shadow-soft); }
+
+  /* Header */
+  .site-header {
+    position: fixed; top:0; left:0; right:0; z-index:50;
+    backdrop-filter: blur(20px) saturate(150%);
+    -webkit-backdrop-filter: blur(20px) saturate(150%);
+    background: color-mix(in oklab, var(--color-background) 85%, transparent);
+    border-bottom: 1px solid var(--color-border);
+    transition: box-shadow .3s;
+  }
+  .site-header.scrolled { box-shadow: 0 8px 32px rgba(0,0,0,.08); }
+  .nav-link { font-size:.875rem; font-weight:600; text-transform:uppercase; letter-spacing:.1em; opacity:.8; cursor:pointer; background:none; border:none; color:inherit; }
+  .nav-link:hover { opacity:1; color: var(--color-primary); }
+
+  /* Stat / cards */
+  .stat-card { background: var(--gradient-tile); border: 1.5px solid var(--color-border); border-radius: 1rem; padding: 2.25rem; text-align:center; box-shadow: var(--shadow-soft); }
+  .stat-num { display:block; font-size: 2.5rem; font-weight:900; color: var(--color-primary); margin-bottom:.5rem; line-height:1; }
+  .stat-label { display:block; font-size:.875rem; text-transform:uppercase; letter-spacing:.08em; opacity:.65; font-weight:700; }
+
+  .skill-card { background: var(--gradient-tile); border: 1.5px solid var(--color-border); border-radius: 1.5rem; padding: 2.5rem; }
+  .project-card { background: var(--gradient-tile); border:1.5px solid var(--color-border); border-radius: 1.5rem; overflow:hidden; display:block; text-decoration:none; color:inherit; }
+  .project-cover { aspect-ratio: 16/10; background: linear-gradient(135deg, #95c1d2, #619bb6); display:flex; align-items:center; justify-content:center; color:white; font-size:3rem; font-weight:900; letter-spacing:.05em; }
+  .tag { padding: .375rem 1rem; border-radius: 9999px; font-size:.875rem; font-weight:700; color: var(--color-primary); background: var(--gradient-tile-strong); border:1px solid rgb(var(--primary-rgb) / 0.2); display:inline-block; }
+
+  .btn-primary { background: var(--gradient-btn); color:white; padding: 1rem 3rem; border-radius: 1rem; font-weight:700; box-shadow: var(--shadow-glow); display:inline-block; text-decoration:none; transition: transform .3s; }
+  .btn-primary:hover { transform: translateY(-4px); }
+  .btn-outline { background: var(--gradient-tile); border: 2px solid var(--color-border); padding: 1rem 3rem; border-radius: 1rem; font-weight:700; display:inline-block; text-decoration:none; color:inherit; transition: transform .3s; }
+  .btn-outline:hover { transform: translateY(-4px); }
+
+  .social-icon { width:48px; height:48px; border-radius:12px; border:1.5px solid var(--color-border); background: var(--gradient-tile); display:inline-flex; align-items:center; justify-content:center; color:inherit; transition: all .3s; }
+  .social-icon:hover { transform: translateY(-4px) scale(1.06); color: var(--color-primary); border-color: var(--color-primary); }
+</style>
+</head>
+<body>
+
+<!-- Theme toggle -->
+<button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+  <svg id="themeIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+  </svg>
+</button>
+
+<!-- Header -->
+<header class="site-header" id="siteHeader">
+  <nav class="container-x flex items-center justify-between" style="padding-top:1.25rem;padding-bottom:1.25rem;">
+    <a href="#top" class="relative text-2xl font-black tracking-tight text-primary" style="text-decoration:none;">
+      INIYA S
+      <span style="position:absolute; bottom:-4px; left:0; height:3px; width:40%; border-radius:9999px; background: var(--gradient-bar);"></span>
+    </a>
+    <ul class="hidden md:flex items-center gap-12 list-none" style="margin:0;padding:0;">
+      <li><button class="nav-link story-link" data-target="#about">About</button></li>
+      <li><button class="nav-link story-link" data-target="#education">Education</button></li>
+      <li><button class="nav-link story-link" data-target="#skills">Skills</button></li>
+      <li><button class="nav-link story-link" data-target="#projects">Projects</button></li>
+      <li><button class="nav-link story-link" data-target="#contact">Contact</button></li>
+    </ul>
+    <button id="menuBtn" class="md:hidden" style="background:none;border:none;cursor:pointer;padding:.5rem;display:flex;flex-direction:column;gap:5px;">
+      <span style="display:block;width:28px;height:3px;background:var(--color-primary);border-radius:2px;"></span>
+      <span style="display:block;width:28px;height:3px;background:var(--color-primary);border-radius:2px;"></span>
+      <span style="display:block;width:28px;height:3px;background:var(--color-primary);border-radius:2px;"></span>
+    </button>
+  </nav>
+  <div id="mobileMenu" style="display:none;" class="md:hidden">
+    <ul class="list-none flex flex-col gap-4 px-8 pb-6" style="margin:0;padding:0 2rem 1.5rem;">
+      <li><button class="nav-link" data-target="#about">About</button></li>
+      <li><button class="nav-link" data-target="#education">Education</button></li>
+      <li><button class="nav-link" data-target="#skills">Skills</button></li>
+      <li><button class="nav-link" data-target="#projects">Projects</button></li>
+      <li><button class="nav-link" data-target="#contact">Contact</button></li>
+    </ul>
+  </div>
+</header>
+
+<main>
+
+<!-- HERO -->
+<section id="top" class="relative flex items-center justify-center" style="min-height:100vh; padding-top:7rem; overflow:hidden;">
+  <!-- Conic halo -->
+  <div aria-hidden style="position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:120vmin; height:120vmin; border-radius:50%; opacity:.3; filter:blur(60px); pointer-events:none; background:conic-gradient(from 0deg, rgb(var(--primary-rgb)/.35), transparent 25%, rgb(var(--secondary-rgb)/.3) 50%, transparent 75%, rgb(var(--primary-rgb)/.35)); -webkit-mask-image:radial-gradient(circle, black 40%, transparent 70%); mask-image:radial-gradient(circle, black 40%, transparent 70%);" class="animate-spin-slow"></div>
+
+  <!-- Blobs -->
+  <div aria-hidden class="animate-float-blob" style="position:absolute; left:-5%; top:10%; width:600px; height:600px; border-radius:50%; filter:blur(60px); background:radial-gradient(circle, rgb(var(--primary-rgb)/.22) 0%, transparent 70%);"></div>
+  <div aria-hidden class="animate-float-blob-rev" style="position:absolute; right:-5%; bottom:10%; width:700px; height:700px; border-radius:50%; filter:blur(80px); background:radial-gradient(circle, rgb(var(--secondary-rgb)/.2) 0%, transparent 70%);"></div>
+
+  <!-- Marquee text -->
+  <div aria-hidden style="position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; gap:3rem; pointer-events:none; overflow:hidden; z-index:0;">
+    <div class="animate-marquee-ltr" style="white-space:nowrap; font-weight:900; letter-spacing:-.04em; opacity:.06; font-size:clamp(4rem,14vw,12rem); line-height:1;">
+      Iniya UX/UI Designer • Iniya UX/UI Designer • Iniya UX/UI Designer • Iniya UX/UI Designer •
+    </div>
+    <div class="animate-marquee-rtl" style="white-space:nowrap; font-weight:900; letter-spacing:-.04em; opacity:.05; font-size:clamp(4rem,14vw,12rem); line-height:1;">
+      Iniya UX/UI Designer • Iniya UX/UI Designer • Iniya UX/UI Designer • Iniya UX/UI Designer •
+    </div>
+  </div>
+
+  <!-- Grid -->
+  <div aria-hidden style="position:absolute; inset:0; opacity:.04; pointer-events:none; background-image: linear-gradient(var(--color-foreground) 1px, transparent 1px), linear-gradient(90deg, var(--color-foreground) 1px, transparent 1px); background-size:60px 60px; -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%); mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);"></div>
+
+  <!-- Floating shapes -->
+  <div aria-hidden style="position:absolute; inset:0; pointer-events:none; overflow:hidden;">
+    <div class="animate-drift-1" style="position:absolute; left:8%; top:18%; width:96px; height:96px; border-radius:50%; border:2px solid rgb(var(--primary-rgb)/.35);"></div>
+    <div class="animate-drift-2" style="position:absolute; right:10%; top:24%; width:64px; height:64px; border-radius:50%; background:rgb(var(--secondary-rgb)/.35); filter:blur(2px);"></div>
+    <div class="animate-drift-3" style="position:absolute; left:14%; bottom:18%; width:80px; height:80px; transform:rotate(45deg); background:linear-gradient(135deg, rgb(var(--primary-rgb)/.25), rgb(var(--secondary-rgb)/.15)); border-radius:8px;"></div>
+    <div class="animate-drift-1" style="position:absolute; right:14%; bottom:22%; width:0; height:0; border-left:28px solid transparent; border-right:28px solid transparent; border-bottom:48px solid rgb(var(--primary-rgb)/.30);"></div>
+    <div class="animate-drift-2" style="position:absolute; right:28%; top:60%; width:48px; height:48px; border-radius:50%; border:2px solid rgb(var(--secondary-rgb)/.45);"></div>
+  </div>
+
+  <!-- Sparkles -->
+  <div aria-hidden style="position:absolute; inset:0; pointer-events:none; overflow:hidden;">
+    <span class="animate-twinkle bg-primary" style="position:absolute; left:12%; top:22%; width:6px; height:6px; border-radius:50%; box-shadow:0 0 12px rgb(var(--primary-rgb)/.8);"></span>
+    <span class="animate-twinkle bg-primary" style="position:absolute; left:82%; top:18%; width:4px; height:4px; border-radius:50%; animation-delay:1.2s; box-shadow:0 0 12px rgb(var(--primary-rgb)/.8);"></span>
+    <span class="animate-twinkle bg-primary" style="position:absolute; left:68%; top:78%; width:8px; height:8px; border-radius:50%; animation-delay:2.4s; box-shadow:0 0 12px rgb(var(--primary-rgb)/.8);"></span>
+    <span class="animate-twinkle bg-primary" style="position:absolute; left:22%; top:72%; width:5px; height:5px; border-radius:50%; animation-delay:.6s; box-shadow:0 0 12px rgb(var(--primary-rgb)/.8);"></span>
+    <span class="animate-twinkle bg-primary" style="position:absolute; left:48%; top:12%; width:4px; height:4px; border-radius:50%; animation-delay:1.8s; box-shadow:0 0 12px rgb(var(--primary-rgb)/.8);"></span>
+    <span class="animate-twinkle bg-primary" style="position:absolute; left:92%; top:55%; width:6px; height:6px; border-radius:50%; animation-delay:3s; box-shadow:0 0 12px rgb(var(--primary-rgb)/.8);"></span>
+    <span class="animate-twinkle bg-primary" style="position:absolute; left:8%; top:48%; width:5px; height:5px; border-radius:50%; animation-delay:2.1s; box-shadow:0 0 12px rgb(var(--primary-rgb)/.8);"></span>
+  </div>
+
+  <div class="relative z-10 text-center" style="max-width:64rem; margin:0 1.5rem; padding:3.5rem 1.5rem;">
+    <div class="reveal in-view" style="display:inline-flex; align-items:center; gap:.5rem; padding:.75rem 1.75rem; border-radius:9999px; border:1.5px solid rgb(var(--primary-rgb)/.25); margin-bottom:2.5rem; font-weight:700; font-size:.875rem; letter-spacing:.05em; background:var(--gradient-tile); color:var(--color-primary); box-shadow:var(--shadow-soft);">
+      <span class="bg-primary animate-pulse-ring" style="width:9px; height:9px; border-radius:50%;"></span>
+      Available for UX/UI Projects
+    </div>
+
+    <h1 style="font-weight:900; line-height:1.05; letter-spacing:-.04em; margin:0 0 1.5rem; font-size:clamp(3.5rem,11vw,7rem);">
+      Hi, I'm
+      <span style="position:relative; display:inline-block;" id="nameWrap">
+        <span style="display:inline-flex;" id="nameLetters"></span>
+        <span aria-hidden class="name-underline" style="position:absolute; left:0; right:0; bottom:-8px; height:6px; border-radius:9999px; background:var(--gradient-bar);"></span>
+      </span>
+    </h1>
+
+    <p style="font-weight:600; margin:0 0 2rem; opacity:.9; font-size:clamp(1.4rem,3.5vw,2.2rem);">UX/UI Designer</p>
+
+    <p style="max-width:48rem; margin:0 auto 3.5rem; opacity:.75; line-height:1.85; font-size:clamp(1.05rem,1.8vw,1.25rem);">
+      I design intuitive, user-centered digital experiences that bridge business goals with user needs. With a foundation in Business Administration and a passion for design thinking, I transform complex problems into elegant, accessible solutions that users love.
+    </p>
+
+    <div style="display:flex; justify-content:center; gap:1.25rem; flex-wrap:wrap; margin-bottom:3.5rem;">
+      <a class="btn-shine btn-primary" href="https://www.behance.net/iniyas1" target="_blank" rel="noreferrer">View My Work</a>
+      <a class="btn-outline" href="mailto:iniya2443@gmail.com">Get in Touch</a>
+    </div>
+
+    <div style="display:flex; justify-content:center; gap:1.25rem;">
+      <a class="social-icon" href="https://www.linkedin.com/in/iniya-s-24ai04/" target="_blank" rel="noreferrer" title="LinkedIn"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M6.94 5a2 2 0 1 1-4-.002 2 2 0 0 1 4 .002zM7 8.48H3V21h4V8.48zm6.32 0H9.34V21h3.94v-6.57c0-3.66 4.77-4 4.77 0V21H22v-7.93c0-6.17-7.06-5.94-8.72-2.91l.04-1.68z"/></svg></a>
+      <a class="social-icon" href="https://dribbble.com/account/profile" target="_blank" rel="noreferrer" title="Dribbble"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c5.51 0 10-4.48 10-10S17.51 2 12 2zm6.605 4.61a8.502 8.502 0 0 1 1.93 5.314c-.281-.054-3.101-.629-5.943-.271-.065-.141-.12-.293-.184-.445a25.416 25.416 0 0 0-.564-1.236c3.145-1.28 4.577-3.124 4.761-3.362zM12 3.475c2.17 0 4.154.813 5.662 2.148-.152.216-1.443 1.941-4.48 3.08-1.399-2.57-2.95-4.675-3.189-5A8.687 8.687 0 0 1 12 3.475zm-3.633.803a53.896 53.896 0 0 1 3.167 4.935c-3.992 1.063-7.517 1.04-7.896 1.04a8.581 8.581 0 0 1 4.729-5.975zM3.453 12.01v-.26c.37.01 4.512.065 8.775-1.215.25.477.477.965.694 1.453-.109.033-.228.065-.336.098-4.404 1.42-6.747 5.303-6.942 5.629a8.522 8.522 0 0 1-2.19-5.705zM12 20.547a8.482 8.482 0 0 1-5.239-1.8c.152-.315 1.888-3.656 6.703-5.337.022-.01.033-.01.054-.022a35.318 35.318 0 0 1 1.823 6.475 8.4 8.4 0 0 1-3.341.684zm4.761-1.465c-.086-.52-.542-3.015-1.659-6.084 2.679-.423 5.022.271 5.314.369a8.468 8.468 0 0 1-3.655 5.715z"/></svg></a>
+      <a class="social-icon" href="https://github.com/iniya2443-art" target="_blank" rel="noreferrer" title="GitHub"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.475 2 2 6.475 2 12a9.994 9.994 0 0 0 6.838 9.488c.5.087.687-.213.687-.476 0-.237-.013-1.024-.013-1.862-2.512.463-3.162-.612-3.362-1.175-.113-.288-.6-1.175-1.025-1.413-.35-.187-.85-.65-.013-.662.788-.013 1.35.725 1.538 1.025.9 1.512 2.338 1.087 2.912.825.088-.65.35-1.087.638-1.337-2.225-.25-4.55-1.113-4.55-4.938 0-1.088.387-1.987 1.025-2.688-.1-.25-.45-1.275.1-2.65 0 0 .837-.262 2.75 1.026a9.28 9.28 0 0 1 2.5-.338c.85 0 1.7.112 2.5.337 1.912-1.3 2.75-1.024 2.75-1.024.55 1.375.2 2.4.1 2.65.637.7 1.025 1.587 1.025 2.687 0 3.838-2.337 4.688-4.562 4.938.362.312.675.912.675 1.85 0 1.337-.013 2.412-.013 2.75 0 .262.188.574.688.474A10.016 10.016 0 0 0 22 12c0-5.525-4.475-10-10-10z"/></svg></a>
+      <a class="social-icon" href="https://docs.google.com/document/d/14czOTCRydLVge9KY0Bptkr8_mIpSWWV9/edit?usp=sharing" target="_blank" rel="noreferrer" title="Resume"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M13 12h7v1.5h-7zm0-2.5h7V11h-7zm0 5h7V16h-7zM12 3v3H9v1.5h3v3h1.5v-3h3V6h-3V3zM4 3h5v2H4v14h14v-5h2v5a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5c0-1.1.9-2 2-2z"/></svg></a>
+    </div>
+
+    <div style="margin-top:5rem; display:flex; justify-content:center;">
+      <div style="width:28px; height:44px; border-radius:9999px; border:2px solid var(--color-border); display:flex; align-items:flex-start; justify-content:center; padding:6px;">
+        <span class="bg-primary animate-scroll-bob" style="width:6px; height:10px; border-radius:9999px;"></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="section relative" style="overflow:hidden;">
+  <div aria-hidden style="position:absolute; inset:0; pointer-events:none; z-index:-1;">
+    <div class="animate-float-blob" style="position:absolute; left:-10%; top:10%; width:500px; height:500px; border-radius:50%; filter:blur(80px); opacity:.6; background:radial-gradient(circle, rgb(var(--primary-rgb)/.18) 0%, transparent 70%);"></div>
+    <div class="animate-float-blob-rev" style="position:absolute; right:-10%; bottom:5%; width:550px; height:550px; border-radius:50%; filter:blur(90px); opacity:.6; background:radial-gradient(circle, rgb(var(--secondary-rgb)/.18) 0%, transparent 70%);"></div>
+    <svg class="animate-drift-2" style="position:absolute; right:8%; top:14%; width:40px; height:40px; opacity:.4; color:var(--color-primary);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3l7 17 2-7 7-2z"/></svg>
+    <svg class="animate-drift-3" style="position:absolute; left:10%; bottom:20%; width:48px; height:48px; opacity:.4; color:var(--color-primary);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg>
+    <div class="animate-drift-1" style="position:absolute; right:6%; bottom:18%; width:64px; height:48px; border-radius:6px; border:2px solid rgb(var(--primary-rgb)/.6); opacity:.4;"></div>
+    <div class="animate-drift-2" style="position:absolute; right:20%; top:55%; display:flex; gap:6px; opacity:.5;">
+      <span style="width:20px;height:20px;border-radius:4px;background:rgb(var(--primary-rgb)/.7);"></span>
+      <span style="width:20px;height:20px;border-radius:4px;background:rgb(var(--secondary-rgb)/.8);"></span>
+      <span style="width:20px;height:20px;border-radius:4px;background:rgb(var(--primary-rgb)/.4);"></span>
+    </div>
+  </div>
+
+  <div class="container-x">
+    <div class="text-center reveal" style="margin-bottom:5rem;">
+      <p style="display:inline-block; padding:.5rem 1.5rem; border-radius:9999px; font-size:.875rem; font-weight:800; text-transform:uppercase; letter-spacing:.2em; color:var(--color-primary); border:1px solid rgb(var(--primary-rgb)/.15); background:var(--gradient-tile);">About Me</p>
+      <h2 style="font-weight:900; margin-top:1rem; line-height:1.2; letter-spacing:-.03em; font-size:clamp(2.5rem,6vw,3.5rem);">Designing with <span class="animate-shimmer">empathy &amp; purpose</span></h2>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-20 items-center">
+      <div class="reveal text-center relative">
+        <div aria-hidden style="position:absolute; left:50%; transform:translateX(-50%); top:-20px; bottom:-20px; width:calc(100% - 40px); max-width:380px; border-radius:1.5rem; z-index:-1; filter:blur(48px); background:var(--gradient-tile-strong);"></div>
+        <div style="width:100%; max-width:420px; margin:0 auto; aspect-ratio:3/4; border-radius:50%; border:4px solid #94a3b8; box-shadow:var(--shadow-lift); background:linear-gradient(135deg, var(--color-primary), var(--color-secondary)); display:flex; align-items:center; justify-content:center; color:white; font-size:5rem; font-weight:900; letter-spacing:-.03em;">IS</div>
+      </div>
+      <div class="reveal">
+        <p style="opacity:.85; line-height:1.9; margin:0 0 1.75rem;">"I'm a UX/UI Designer with a background in Business Administration. I graduated with First Class with Distinction from Thiruvalluvar University, and my final-year project on Employee Retention helped me develop a deeper understanding of user behavior.</p>
+        <p style="opacity:.85; line-height:1.9; margin:0 0 1.75rem;">About nine months ago, I discovered my passion for UX/UI design while exploring how apps and websites are created. This curiosity led me to pursue a comprehensive UX/UI design course, and I've been deeply committed to growing in this field ever since.</p>
+        <p style="opacity:.85; line-height:1.9; margin:0 0 1.75rem;">I have completed three professional projects, each focused on solving real user problems through research, prototyping, and iterative design. My approach blends business strategy with user-centered design to create digital experiences that are both functional and visually engaging.</p>
+        <div class="grid grid-cols-2 gap-7" style="margin-top:2.5rem;">
+          <div class="stat-card tilt-card top-accent"><span class="stat-num">2023</span><span class="stat-label">Graduate</span></div>
+          <div class="stat-card tilt-card top-accent"><span class="stat-num">1st Class</span><span class="stat-label">with Distinction</span></div>
+          <div class="stat-card tilt-card top-accent"><span class="stat-num">9 Months</span><span class="stat-label">UX/UI Journey</span></div>
+          <div class="stat-card tilt-card top-accent"><span class="stat-num">3</span><span class="stat-label">Projects</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education" class="section">
+  <div class="container-x">
+    <div class="text-center reveal" style="margin-bottom:5rem;">
+      <p style="display:inline-block; padding:.5rem 1.5rem; border-radius:9999px; font-size:.875rem; font-weight:800; text-transform:uppercase; letter-spacing:.2em; color:var(--color-primary); border:1px solid rgb(var(--primary-rgb)/.15); background:var(--gradient-tile);">Education</p>
+      <h2 style="font-weight:900; margin-top:1rem; line-height:1.2; letter-spacing:-.03em; font-size:clamp(2.5rem,6vw,3.5rem);">Academic <span class="animate-shimmer">Background</span></h2>
+    </div>
+
+    <div class="reveal tilt-card top-accent" style="max-width:950px; margin:0 auto; border-radius:1.5rem; padding:3.5rem; border:1.5px solid var(--color-border); background:var(--gradient-tile);">
+      <div style="font-size:2.2rem; font-weight:900; margin-bottom:.5rem; letter-spacing:-.02em;">Bachelor of Business Administration (BBA)</div>
+      <div style="font-size:1.4rem; opacity:.85; font-weight:600; margin-bottom:.5rem;">Thiruvalluvar University</div>
+      <div style="font-size:1.05rem; opacity:.65; margin-bottom:2rem; font-weight:600;">2020 - 2023</div>
+      <div style="display:inline-block; color:white; padding:.75rem 2rem; font-weight:800; margin-bottom:2.5rem; border-radius:.75rem; background:var(--gradient-btn); box-shadow:var(--shadow-glow);">First Class with Distinction</div>
+      <div style="margin-top:2.5rem; padding-top:2.5rem; border-top:2px solid var(--color-border);">
+        <h4 style="font-size:1.5rem; margin-bottom:1.25rem; color:var(--color-primary); font-weight:800;">Final Year Project</h4>
+        <p style="opacity:.85; line-height:1.9; margin-bottom:1.25rem;"><strong>Employee Retention: Strategies for Organizational Success</strong></p>
+        <p style="opacity:.85; line-height:1.9; margin-bottom:1.25rem;">Conducted comprehensive research analyzing factors that influence employee satisfaction, engagement, and organizational commitment. This project laid the foundation for understanding user behavior and psychology—principles that directly translate to creating user-centered design solutions.</p>
+        <h4 style="font-size:1.5rem; margin:2.5rem 0 1.25rem; color:var(--color-primary); font-weight:800;">UX/UI Design Certification</h4>
+        <p style="opacity:.85; line-height:1.9; margin-bottom:1.25rem;">Completed intensive UX/UI Design course covering user research, wireframing, prototyping, visual design, and usability testing. Applied learned principles across 3 real-world projects.</p>
+        <a class="btn-shine btn-primary" style="margin-top:1.5rem;" href="https://v2.zenclass.in/certificateDownload/AvV7QFPwkgghjCjn?download=true" target="_blank" rel="noreferrer">View Certificate</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="section">
+  <div class="container-x">
+    <div class="text-center reveal" style="margin-bottom:5rem;">
+      <p style="display:inline-block; padding:.5rem 1.5rem; border-radius:9999px; font-size:.875rem; font-weight:800; text-transform:uppercase; letter-spacing:.2em; color:var(--color-primary); border:1px solid rgb(var(--primary-rgb)/.15); background:var(--gradient-tile);">Core Competencies</p>
+      <h2 style="font-weight:900; margin-top:1rem; line-height:1.2; letter-spacing:-.03em; font-size:clamp(2.5rem,6vw,3.5rem);">Skills &amp; <span class="animate-shimmer">Expertise</span></h2>
+    </div>
+    <div style="display:grid; gap:2.5rem; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+      <div class="skill-card tilt-card top-accent reveal">
+        <h3 style="font-size:1.5rem; margin-bottom:1.75rem; font-weight:800;">UX Design</h3>
+        <ul style="list-style:none; margin:0; padding:0;">
+          <li class="skill-item" style="padding:.75rem 0 .75rem 1.5rem; opacity:.85; font-weight:500;">User Research &amp; Analysis</li>
+          <li class="skill-item" style="padding:.75rem 0 .75rem 1.5rem; opacity:.85; font-weight:500;">Wireframing &amp; Prototyping</li>
+          <li class="skill-item" style="padding:.75rem 0 .75rem 1.5rem; opacity:.85; font-weight:500;">Information Architecture</li>
+          <li class="skill-item" style="padding:.75rem 0 .75rem 1.5rem; opacity:.85; font-weight:500;">Usability Testing</li>
+          <li class="skill-item" style="padding:.75rem 0 .75rem 1.5rem; opacity:.85; font-weight:500;">User Journey Mapping</li>
+        </ul>
+      </div>
+      <div class="skill-card tilt-card top-accent reveal">
+        <h3 style="font-size:1.5rem; margin-bottom:1.75rem; font-weight:800;">UI Design</h3>
+        <ul style="list-style:none; margin:0; padding:0;">
+          <li class="skill-item" style="padding:.75rem 0 .75rem 1.5rem; opacity:.85; font-weight:500;">Visual Design</li>
+          <li class="skill-item" style="padding:.75rem 0 .75rem 1.5rem; opacity:.85; font-weight:500;">Design Systems</li>
+          <li class="skill-item" style="padding:.75rem 0 .75rem 1.5rem; opacity:.85; font-weight:500;">Responsive Design</li>
+          <li class="skill-item" style="padding:.75rem 0 .75rem 1.5rem; opacity:.85; font-weight:500;">Interaction Design</li>
+          <li class="skill-item" style="padding:.75rem 0 .75rem 1.5rem; opacity:.85; font-weight:500;">Brand Identity</li>
+        </ul>
+      </div>
+      <div class="skill-card tilt-card top-accent reveal">
+        <h3 style="font-size:1.5rem; margin-bottom:1.75rem; font-weight:800;">Design Tools</h3>
+        <ul style="list-style:none; margin:0; padding:0;">
+          <li class="skill-item" style="padding:.75rem 0 .75rem 1.5rem; opacity:.85; font-weight:500;">Figma</li>
+          <li class="skill-item" style="padding:.75rem 0 .75rem 1.5rem; opacity:.85; font-weight:500;">Miro</li>
+          <li class="skill-item" style="padding:.75rem 0 .75rem 1.5rem; opacity:.85; font-weight:500;">Adobe XD</li>
+          <li class="skill-item" style="padding:.75rem 0 .75rem 1.5rem; opacity:.85; font-weight:500;">Adobe Photoshop</li>
+          <li class="skill-item" style="padding:.75rem 0 .75rem 1.5rem; opacity:.85; font-weight:500;">Adobe Illustrator</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="section">
+  <div class="container-x">
+    <div class="text-center reveal" style="margin-bottom:5rem;">
+      <p style="display:inline-block; padding:.5rem 1.5rem; border-radius:9999px; font-size:.875rem; font-weight:800; text-transform:uppercase; letter-spacing:.2em; color:var(--color-primary); border:1px solid rgb(var(--primary-rgb)/.15); background:var(--gradient-tile);">My Work</p>
+      <h2 style="font-weight:900; margin-top:1rem; line-height:1.2; letter-spacing:-.03em; font-size:clamp(2.5rem,6vw,3.5rem);">Featured <span class="animate-shimmer">Projects</span></h2>
+    </div>
+    <div style="display:grid; gap:2.5rem; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));">
+      <a class="project-card tilt-card top-accent reveal" href="https://www.behance.net/gallery/238982033/GentleFit-For-beginners-Mood-based-kind-motivation/modules/1420541131" target="_blank" rel="noreferrer">
+        <div class="project-cover" style="background:linear-gradient(135deg, #5fbfb3, #619bb6);">GF</div>
+        <div style="padding:2.5rem;">
+          <h3 style="font-size:1.5rem; margin-bottom:1rem; font-weight:800; letter-spacing:-.02em;">GentleFit</h3>
+          <p style="opacity:.75; line-height:1.75; margin-bottom:1.75rem;">A beginner-focused wellness and fitness app that empowers users to build consistent, healthy habits from home through mood-based, equipment-free routines.</p>
+          <div style="display:flex; flex-wrap:wrap; gap:.5rem;"><span class="tag">Mobile App</span><span class="tag">Wellness</span><span class="tag">Figma</span><span class="tag">User Research</span></div>
+        </div>
+      </a>
+      <a class="project-card tilt-card top-accent reveal" href="https://www.behance.net/gallery/235681093/CookedUp-ResipeDiscovery-Meal-Planning-Food-Delivery/modules/1420110075" target="_blank" rel="noreferrer">
+        <div class="project-cover" style="background:linear-gradient(135deg, #d4953a, #c25d3a);">CU</div>
+        <div style="padding:2.5rem;">
+          <h3 style="font-size:1.5rem; margin-bottom:1rem; font-weight:800; letter-spacing:-.02em;">CookedUp</h3>
+          <p style="opacity:.75; line-height:1.75; margin-bottom:1.75rem;">A Tamil Nadu-special food app that simplifies healthy eating through personalized meal plans, recipe discovery, and food delivery in one clean UI.</p>
+          <div style="display:flex; flex-wrap:wrap; gap:.5rem;"><span class="tag">Food &amp; Lifestyle</span><span class="tag">Mobile Design</span><span class="tag">Prototyping</span><span class="tag">Usability Testing</span></div>
+        </div>
+      </a>
+      <a class="project-card tilt-card top-accent reveal" href="https://www.behance.net/gallery/229453835/Task-Management-Time-Tracking-Productivity-Booster/modules/1314595613" target="_blank" rel="noreferrer">
+        <div class="project-cover" style="background:linear-gradient(135deg, #9b7bc7, #6b5fa8);">SYT</div>
+        <div style="padding:2.5rem;">
+          <h3 style="font-size:1.5rem; margin-bottom:1rem; font-weight:800; letter-spacing:-.02em;">See Your Time</h3>
+          <p style="opacity:.75; line-height:1.75; margin-bottom:1.75rem;">A task management and time tracking solution designed to improve productivity with clear task organization, integrated time tracking, and an intuitive interface.</p>
+          <div style="display:flex; flex-wrap:wrap; gap:.5rem;"><span class="tag">Productivity</span><span class="tag">Time Tracking</span><span class="tag">Mobile App</span><span class="tag">Miro</span></div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="section">
+  <div class="container-x">
+    <div class="text-center reveal" style="margin-bottom:5rem;">
+      <p style="display:inline-block; padding:.5rem 1.5rem; border-radius:9999px; font-size:.875rem; font-weight:800; text-transform:uppercase; letter-spacing:.2em; color:var(--color-primary); border:1px solid rgb(var(--primary-rgb)/.15); background:var(--gradient-tile);">Get In Touch</p>
+      <h2 style="font-weight:900; margin-top:1rem; line-height:1.2; letter-spacing:-.03em; font-size:clamp(2.5rem,6vw,3.5rem);">Let's <span class="animate-shimmer">collaborate</span></h2>
+    </div>
+    <div style="max-width:850px; margin:0 auto; text-align:center;">
+      <p class="reveal" style="font-size:1.25rem; margin-bottom:3.5rem; opacity:.85; line-height:1.9;">I'm always interested in discussing new UX/UI projects, design collaborations, and opportunities to create meaningful user experiences.</p>
+      <div style="display:flex; flex-direction:column; gap:1.75rem; margin-bottom:3.5rem;">
+        <div class="reveal" style="display:flex; align-items:center; justify-content:center; gap:1.25rem; padding:1.25rem; border-radius:1rem; border:1px solid var(--color-border); background:var(--gradient-tile);">
+          <span style="font-size:1.5rem;">📍</span><span style="font-weight:600;">Chennai, Tamil Nadu, India</span>
+        </div>
+        <a class="reveal" href="mailto:iniya2443@gmail.com" style="display:flex; align-items:center; justify-content:center; gap:1.25rem; padding:1.25rem; border-radius:1rem; border:1px solid var(--color-border); background:var(--gradient-tile); text-decoration:none; color:inherit;">
+          <span style="font-size:1.5rem;">📧</span><span style="font-weight:600;">iniya2443@gmail.com</span>
+        </a>
+        <a class="reveal" href="https://www.linkedin.com/in/iniya-s-24ai04/" target="_blank" rel="noreferrer" style="display:flex; align-items:center; justify-content:center; gap:1.25rem; padding:1.25rem; border-radius:1rem; border:1px solid var(--color-border); background:var(--gradient-tile); text-decoration:none; color:inherit;">
+          <span style="font-size:1.5rem;">💼</span><span style="font-weight:600;">LinkedIn Profile</span>
+        </a>
+      </div>
+      <div style="display:flex; justify-content:center; gap:1.5rem; margin-top:3.5rem;">
+        <a href="https://www.linkedin.com/in/iniya-s-24ai04/" target="_blank" rel="noreferrer" title="LinkedIn" style="width:64px; height:64px; border-radius:1rem; border:2px solid var(--color-border); background:var(--gradient-tile); display:inline-flex; align-items:center; justify-content:center; font-weight:800; font-size:1.25rem; color:inherit; text-decoration:none;">in</a>
+        <a href="https://www.behance.net/iniyas1" target="_blank" rel="noreferrer" title="Behance" style="width:64px; height:64px; border-radius:1rem; border:2px solid var(--color-border); background:var(--gradient-tile); display:inline-flex; align-items:center; justify-content:center; font-weight:800; font-size:1.25rem; color:inherit; text-decoration:none;">Be</a>
+        <a href="https://dribbble.com/account/profile" target="_blank" rel="noreferrer" title="Dribbble" style="width:64px; height:64px; border-radius:1rem; border:2px solid var(--color-border); background:var(--gradient-tile); display:inline-flex; align-items:center; justify-content:center; font-weight:800; font-size:1.25rem; color:inherit; text-decoration:none;">Dr</a>
+        <a href="mailto:iniya2443@gmail.com" title="Email" style="width:64px; height:64px; border-radius:1rem; border:2px solid var(--color-border); background:var(--gradient-tile); display:inline-flex; align-items:center; justify-content:center; font-weight:800; font-size:1.25rem; color:inherit; text-decoration:none;">✉</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer style="text-align:center; padding:3rem 0; border-top:2px solid var(--color-border); opacity:.65; background:var(--gradient-tile);">
+  <p style="margin:.25rem 0; font-weight:500;">© 2026 Iniya S. All rights reserved.</p>
+  <p style="margin:.25rem 0; font-weight:500;">Designed with purpose &amp; passion</p>
+</footer>
+
+</main>
+
+<script>
+  // Name letters
+  const letters = "Iniya S".split("");
+  const wrap = document.getElementById("nameLetters");
+  letters.forEach((ch, i) => {
+    const s = document.createElement("span");
+    s.className = "name-letter animate-shimmer";
+    s.textContent = ch === " " ? "\u00A0" : ch;
+    s.style.animationDelay = (1 + i * 0.15) + "s";
+    wrap.appendChild(s);
+  });
+
+  // Header scroll
+  const header = document.getElementById("siteHeader");
+  const onScroll = () => header.classList.toggle("scrolled", window.scrollY > 50);
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
+  // Smooth scroll for nav buttons
+  document.querySelectorAll("[data-target]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const el = document.querySelector(btn.getAttribute("data-target"));
+      if (el) el.scrollIntoView({ behavior:"smooth", block:"start" });
+      document.getElementById("mobileMenu").style.display = "none";
+    });
+  });
+
+  // Mobile menu
+  document.getElementById("menuBtn").addEventListener("click", () => {
+    const m = document.getElementById("mobileMenu");
+    m.style.display = m.style.display === "block" ? "none" : "block";
+  });
+
+  // Reveal on scroll
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in-view"); io.unobserve(e.target); } });
+  }, { rootMargin: "-60px" });
+  document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+
+  // Theme toggle
+  const root = document.documentElement;
+  const saved = localStorage.getItem("theme");
+  if (saved === "dark" || (!saved && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+    root.classList.add("dark");
+  }
+  document.getElementById("themeToggle").addEventListener("click", () => {
+    root.classList.toggle("dark");
+    localStorage.setItem("theme", root.classList.contains("dark") ? "dark" : "light");
+  });
+</script>
+</body>
+</html>
